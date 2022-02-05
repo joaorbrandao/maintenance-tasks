@@ -1,0 +1,9 @@
+commonLabels:
+  repo: service-maintenance-tasks
+
+resources:
+- ./resources/deployment/deployment.yaml
+- ./resources/service/service.yaml
+
+patchesStrategicMerge:
+- ./resources/deployment/patches/environment.yaml

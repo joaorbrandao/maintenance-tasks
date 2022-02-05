@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-maintenance-tasks
+spec:
+  selector:
+    matchLabels:
+      deployment: service-maintenance-tasks
+  template:
+    metadata:
+      name: service-maintenance-tasks
+      labels:
+        deployment: service-maintenance-tasks
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: service-maintenance-tasks
+        image: fictional.registry.example:10443/service-maintenance-tasks
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 3000
+            name: main
+            protocol: TCP

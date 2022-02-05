@@ -1,0 +1,35 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    environment:
+      MYSQL_DATABASE: 'maintenance-tasks'
+      MYSQL_USER: 'maintenance-tasks_user'
+      MYSQL_PASSWORD: 'maintenance-tasks_p4s5w0rd'
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: root
+
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    expose:
+      - "5672"
+      - "15672"
+
+  app:
+    build: .
+    image: service-maintenance-tasks:latest
+    env_file: docker.env
+    ports:
+      - "3000:3000"
+    expose:
+      - "3000"
+    depends_on:
+      - mysql
+      - rabbitmq

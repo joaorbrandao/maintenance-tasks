@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-maintenance-tasks
+spec:
+  template:
+    spec:
+      containers:
+      - name: service-maintenance-tasks
+        env:
+          - name: SERVER_PORT
+            value: "3000"
+
+        envFrom:
+          - configMapRef:
+              name: service-maintenance-tasks
+          - secretRef:
+              name: service-maintenance-tasks
+          - secretRef:
+              name: databases

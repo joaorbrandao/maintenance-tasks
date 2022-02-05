@@ -1,0 +1,14 @@
+namespace: development
+
+commonLabels:
+  cluster: development
+  environment: development
+
+bases:
+- ../../base
+
+configMapGenerator:
+  - name: service-maintenance-tasks
+    literals:
+      - NODE_ENV=development
+      - LOG_LEVEL=info
